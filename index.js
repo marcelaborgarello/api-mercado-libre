@@ -1,11 +1,11 @@
-const mostrarResultados = (resultado) => {
-  const contenedor = document.querySelector(".results");
+const showResults = (results) => {
+  const container = document.querySelector(".results");
   const template = document.querySelector("#result-item-template");
 
-  const contador = document.querySelector(".results-count");
-  contador.textContent = resultado.length;
+  const counter = document.querySelector(".results-count");
+  counter.textContent = results.length;
 
-  for (let item of resultado) {
+  for (let item of results) {
     const titleProduct = template.content.querySelector(".result-item-title");
     titleProduct.textContent = item.title;
 
@@ -27,7 +27,7 @@ const mostrarResultados = (resultado) => {
     soldQuantityProduct.textContent = item.sold_quantity;
 
     const clone = document.importNode(template.content, true);
-    contenedor.appendChild(clone);
+    container.appendChild(clone);
   }
 };
 
@@ -42,7 +42,7 @@ const handleSubmit = (e) => {
   fetch(`https://api.mercadolibre.com/sites/MLA/search?q=${datoABuscar}`)
     .then((res) => res.json())
     .then((data) => {
-      mostrarResultados(data.results);
+      showResults(data.results);
     });
 
   e.target.buscar.value = "";
