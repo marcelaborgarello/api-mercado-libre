@@ -29,12 +29,14 @@ const mostrarResultados = (resultado) => {
     const clone = document.importNode(template.content, true);
     contenedor.appendChild(clone);
   }
-
-  console.log(contenedor);
 };
 
 const handleSubmit = (e) => {
   e.preventDefault();
+  e.target.buscar.value !== ""
+    ? e.target.buscar.value
+    : alert("Este campo no puede estar vacío para realizar una búsqueda");
+
   const datoABuscar = e.target.buscar.value;
 
   fetch(`https://api.mercadolibre.com/sites/MLA/search?q=${datoABuscar}`)
