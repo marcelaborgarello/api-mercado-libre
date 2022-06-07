@@ -4,6 +4,7 @@ const showResults = (results) => {
 
   const counter = document.querySelector(".results-count");
   counter.textContent = results.length;
+  container.innerHTML = "";
 
   for (let item of results) {
     const titleProduct = template.content.querySelector(".result-item-title");
@@ -37,9 +38,9 @@ const handleSubmit = (e) => {
     ? e.target.buscar.value
     : alert("Este campo no puede estar vacío para realizar una búsqueda");
 
-  const datoABuscar = e.target.buscar.value;
-
-  fetch(`https://api.mercadolibre.com/sites/MLA/search?q=${datoABuscar}`)
+  fetch(
+    `https://api.mercadolibre.com/sites/MLA/search?q=${e.target.buscar.value}`
+  )
     .then((res) => res.json())
     .then((data) => {
       showResults(data.results);
